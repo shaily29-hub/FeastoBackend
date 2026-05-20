@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+
+    <style>
+        .order-details {
+    background-color: #fafafa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.greeting {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.button {
+    display: inline-block;
+    background-color: #ff6600;
+    color: white !important;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.button:hover {
+    background-color: #e65c00;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+<div class="container">
+<h1>Order Confirmation</h1>
+
+<p class="greeting">
+    Dear <span th:text="${customerName}"></span>,
+</p>
+
+<p>
+    Thank you for your order! We're excited to get your items to you.
+</p>
+
+<div class="order-details">
+    <h2>Order Details</h2>
+
+    <p>Order ID: <span th:text="${orderId}"></span></p>
+    <p>Order Date: <span th:text="${orderDate}"></span></p>
+    <p>Delivery Address: <span th:text="${deliveryAddress}"></span></p>
+    <p>Total Items: <span th:text="${totalItems}"></span></p>
+
+    <div class="items" th:utext="${orderItemsHtml}">
+    </div>
+
+    <p class="total">
+        Total Amount: <span th:text="${totalAmount}"></span>
+    </p>
+</div>
+
+<a class="button" th:href="${paymentLink}">
+    Complete Your Order
+</a>
+
+<p>
+    Click the button above to securely complete your payment and finalize your order.
+</p>
+
+<div class="footer">
+    <p>
+        If you have any questions, please contact us at support@phegondev.com.
+    </p>
+    <p>
+        <span th:text="${currentYear}"></span> Your Phegon Food. All rights reserved.
+    </p>
+</div>
+</div>
+
+</body>
+</html>

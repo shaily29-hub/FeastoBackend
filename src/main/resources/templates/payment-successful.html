@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Successful</title>
+
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2e7d32;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .text {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .details-box {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .details-box p {
+            margin: 8px 0;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: #2e7d32;
+            color: white !important;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #256428;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #777;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Payment Successful</h1>
+
+    <div class="text">
+        <p>Dear <span th:text="${customerName}">Customer</span>,</p>
+
+        <p>
+            Thank you for your payment! Your order has been confirmed and is being processed.
+        </p>
+    </div>
+
+    <div class="details-box">
+        <p><strong>Order Number:</strong> <span th:text="${orderId}">12345</span></p>
+        <p><strong>Transaction ID:</strong> <span th:text="${transactionId}">TXN123</span></p>
+        <p><strong>Payment Date:</strong> <span th:text="${paymentDate}">2026-04-21</span></p>
+        <p><strong>Amount Paid:</strong> ₹<span th:text="${amount}">0.00</span></p>
+    </div>
+
+    <p>
+        We'll notify you when your order ships. You can check your order status anytime in your account.
+    </p>
+
+    <a class="button" th:href="${orderLink}">
+        View Your Orders
+    </a>
+
+    <div class="footer">
+        <p>
+            If you have any questions, contact us at
+            <span th:text="${supportEmail}">support@feasto.com</span>
+        </p>
+        <p>
+            © <span th:text="${currentYear}">2026</span> Feasto. All rights reserved.
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>
