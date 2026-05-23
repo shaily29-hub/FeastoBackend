@@ -34,20 +34,49 @@ public class SecurityFilter {
 
 
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf(AbstractHttpConfigurer::disable)
-                .cors(Customizer.withDefaults())
-                .exceptionHandling(ex->
-                        ex.accessDeniedHandler(customAccessDenialHandler).authenticationEntryPoint(customAuthenticationEntryPoint))
-                .authorizeHttpRequests(req->req.requestMatchers("/",
-        "/error","/api/auth/**","/api/categories/**","/api/menu/**","/api/reviews/**","/api/roles/**","/api/ai/**","/api/auth/**","/api/recommendations/**").permitAll()
-                .anyRequest().authenticated())
-                .sessionManagement(mag->mag.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
-                 return httpSecurity.build();
+   @Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-    }
+    http
+        .csrf(AbstractHttpConfigurer::disable)
+        .cors(Customizer.withDefaults())
+
+        .exceptionHandling(ex -> ex
+                .accessDeniedHandler(customAccessDenialHandler)
+                .authenticationEntryPoint(customAuthenticationEntryPoint)
+        )
+
+        .authorizeHttpRequests(req -> req
+                // public endpoints
+                .requestMatchers(
+                        "/",
+                        "/error",
+                        "/favicon.ico",
+
+                        "/api/auth/**",
+                        "/api/menu/**",
+                        "/api/categories/**",
+                        "/api/reviews/**",
+                        "/api/roles/**",
+                        "/api/ai/**",
+                        "/api/recommendations/**"
+                ).permitAll()
+
+                // admin-only
+                .requestMatchers("/api/users/all").hasAuthority("ADMIN")
+
+                // everything else secured
+                .anyRequest().authenticated()
+        )
+
+        .sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        )
+
+        .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
+
+    return http.build();
+}
 
     @Bean
     public PasswordEncoder passwordEncoder(){
