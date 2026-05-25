@@ -1,7 +1,7 @@
 package com.shailyverma.feasto.config;
 
-import com.shailyverma.feasto.auth_users.entity.Role;
-import com.shailyverma.feasto.auth_users.repository.RoleRepository;
+import com.shailyverma.feasto.role.entity.Role;
+import com.shailyverma.feasto.role.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
