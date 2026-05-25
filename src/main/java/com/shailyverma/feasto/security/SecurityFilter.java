@@ -57,9 +57,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
                         "/api/menu/**",
                         "/api/categories/**",
                         "/api/reviews/**",
-                        "/api/roles/**",
-                        "/api/ai/**",
-                        "/api/recommendations/**"
+                        "/api/roles/**"
                 ).permitAll()
 
                 // admin-only
