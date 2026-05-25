@@ -16,9 +16,11 @@ import org.modelmapper.TypeToken;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -37,12 +39,24 @@ public class UserServiceImpl implements UserService{
     private final CloudinaryService cloudinaryService;
 
  @Override
-    public User getCurrentLoggedInUser() {
-       String email= SecurityContextHolder.getContext().getAuthentication().getName();
+public User getCurrentLoggedInUser() {
 
-       return userRepository.findByEmail(email)
-               .orElseThrow(()-> new NotFoundException("user not found"));
- }
+    Object principal = SecurityContextHolder
+            .getContext()
+            .getAuthentication()
+            .getPrincipal();
+
+    String email;
+
+    if (principal instanceof UserDetails) {
+        email = ((UserDetails) principal).getUsername();
+    } else {
+        email = principal.toString();
+    }
+
+    return userRepository.findByEmail(email)
+            .orElseThrow(() -> new NotFoundException("user not found"));
+}
 
     @Override
     public Response<List<UserDTO>> getAllUsers() {
