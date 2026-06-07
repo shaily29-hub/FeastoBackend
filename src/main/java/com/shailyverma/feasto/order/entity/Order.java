@@ -44,9 +44,8 @@ public class Order {
     @OneToOne(mappedBy = "order")
     private Payment payment;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<OrderItem> orderItems;
-
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+private List<OrderItem> orderItems;
+  
 
 }

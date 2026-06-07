@@ -30,8 +30,8 @@ public class OrderItem {
     @ToString.Exclude
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="order_id")
-    private Order order;
+@JoinColumn(name = "order_id")
+private Order order;
 
 
     @ManyToOne

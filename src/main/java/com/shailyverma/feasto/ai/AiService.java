@@ -37,7 +37,7 @@ public class AiService {
             "https://openrouter.ai/api/v1/chat/completions";
 
     public String getAiReply(AiRequest request) {
-
+        System.out.println("OPENROUTER KEY = " + apiKey);
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();

@@ -18,23 +18,10 @@ import static org.springframework.security.crypto.keygen.KeyGenerators.string;
 
 public class FeastoApplication {
 
-//	private final NotificationService notificationService;
-
 	public static void main(String[] args) {
+
+		System.out.println("DB USER = " + System.getenv("DB_USERNAME"));
+
 		SpringApplication.run(FeastoApplication.class, args);
 	}
-
-//	@Bean
-//	CommandLineRunner runner() {
-//		return args -> {
-//			NotificationDTO notificationDTO = NotificationDTO.builder()
-//					.recipient("feastodev@gmail.com")
-//					.subject("Hello Dennis")
-//					.body("Hey this is a test email")
-//					.type(NotificationType.EMAIL)
-//					.build();
-//
-//			notificationService.sendEmail(notificationDTO);
-//		};
-//	}
-	}
+}
